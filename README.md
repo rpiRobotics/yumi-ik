@@ -1,1 +1,9 @@
 # yumi-ik
+
+Forward and inverse kinemtics from "Redundancy Parameterization of the ABB YuMi Robot Arm."
+
+Forward kinematics, including calculation of the SEW angle (i.e. arm angle)
+
+Invesrse kinematics using 2D search
+
+Calculation of the Jacobian, including the 6x7 Jacobain and the 1x7 SEW Jacobian which combine to form the 7x7 augmented Jacobian
