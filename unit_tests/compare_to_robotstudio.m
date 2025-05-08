@@ -142,7 +142,7 @@ rot(e_3, RPY_B(3))*rot(e_2, RPY_B(2))*rot(e_1, RPY_B(1))-R
 %% Compare SEW angles using e_r = e_z
 
 kin = define_yumi;
-SEW = yumi.sew_abb([0;0;1]);
+SEW = yumi.sew_sign([0;0;1]);
 
 psi_sign_z = [SEW.fwd_kin(kin, q_1)
 SEW.fwd_kin(kin, q_2)
@@ -160,7 +160,7 @@ round(rad2deg(psi_sign_z - psi_vec_robotstudio_z), 2)
 %% Compare SEW angles using e_r = e_y
 
 kin = define_yumi;
-SEW = yumi.sew_abb([0;1;0]);
+SEW = yumi.sew_sign([0;1;0]);
 
 psi_sign_y = [SEW.fwd_kin(kin, q_1)
 SEW.fwd_kin(kin, q_2)
@@ -215,7 +215,7 @@ psi_conv_y = wrapToPi(psi_vec+pi/2);
 round(rad2deg(psi_conv_y - psi_vec_robotstudio_y), 2)
 
 %% temp
-SEW = yumi.sew_abb( [0;1;0]);
+SEW = yumi.sew_sign( [0;1;0]);
 
 SEW_conv = rad2deg(SEW_conv_h4_fwd_kin(q_9, kin, [0;1;0]))+90
 SEW = rad2deg(SEW.fwd_kin(kin, q_9))
@@ -232,7 +232,7 @@ q_deg(7)
 
 %%
 % find random angles in joint limits with different SEW angles
-N = 1e5;
+N = 1e3;
 psi_A_list = NaN([N 1]);
 psi_B_list = NaN([N 1]); 
 Q = NaN([7 N]);
@@ -241,7 +241,8 @@ Q = NaN([7 N]);
 
 e_r = [0;0;1];
 % e_r = [0;1;0];
-SEW = yumi.sew_abb(e_r);
+SEW_A = yumi.sew_conv_h4(e_r);
+SEW_B = yumi.sew_sign(e_r);
 
 for i = 1:N
     % q = rand_angle([7 1]);
@@ -250,8 +251,8 @@ for i = 1:N
     q_deg = round(q_deg);
     q = deg2rad(q_deg);
     
-    psi_A_list(i) = SEW_conv_h4_fwd_kin(q, kin, e_r)+pi/2;
-    psi_B_list(i) = SEW.fwd_kin(kin, q);
+    psi_A_list(i) = SEW_A.fwd_kin_q(q, kin)+pi/2;
+    psi_B_list(i) = SEW_B.fwd_kin(kin, q);
     Q(:,i) = q;
 end
 

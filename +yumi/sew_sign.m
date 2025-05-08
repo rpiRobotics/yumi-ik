@@ -10,7 +10,7 @@ classdef sew_sign
     end
 
     methods
-        function obj = sew_abb(e_r)
+        function obj = sew_sign(e_r)
             obj.e_r = e_r;
         end
 
