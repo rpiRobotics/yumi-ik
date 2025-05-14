@@ -19,7 +19,7 @@ for i = 1:N
     end
 
 end
-%%
+
 Q_path_filter = yumi.filter_Q_joint_limits(Q_path, q_min(2:7), q_max(2:7));
 q2_list = squeeze(Q_path_filter(1,:,:)); % since q is q2 through q7
 plot(q1_list, q2_list', '.')
@@ -31,7 +31,7 @@ yline(q_max(2));
 % q2_list = squeeze(Q_path(1,:,:)); % since q is q2 through q7
 % plot(q1_list, q2_list', '.')
 
-% Extract one self-motion manifold
+%% Extract one self-motion manifold
 
 % [~, Q_path_idx] =  min(wrapTo2Pi(q2_list));
 [~, Q_path_idx] =  min((q2_list));
@@ -57,7 +57,7 @@ e_r = [0;0;1];
 % e_r = [0;1;0];
 % e_r = rand_normal_vec;
 
-SEW = yumi.sew_abb(e_r);
+SEW = yumi.sew_sign(e_r);
 
 SEW_conv = sew_conv(e_r);
 
@@ -83,7 +83,7 @@ hold off
 xline(q_min(1));
 xline(q_max(1));
 
-legend('q_1', 'q_2', '\psi^{ABB}', 'sign term', '\psi^{conv}','','', Location='southeast')
+legend('q_1', 'q_2', '\psi^{sign}', 'sign term', '\psi^{conv}','','', Location='southeast')
 xlabel("\lambda")
 ylim([-pi pi])
 xlim([-pi, pi])

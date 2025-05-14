@@ -33,7 +33,7 @@ classdef sew_conv_h4 < sew_conv
             J_psi = J_psi_E*J_E + J_psi_W*J_W;
         end
 
-        function J = J_aug(obj, q, kin)
+        function [J, J_6x7, J_psi]  = J_aug(obj, q, kin)
             J_6x7 = robotjacobian(kin, q);
             J_psi = obj.full_J_psi(q, kin);
             J = [J_6x7; J_psi];
