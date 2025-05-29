@@ -110,6 +110,11 @@ diagrams.text(p_0T, "$\mathcal O_T$", align='>v', margin=0);
 
 
 
+diagrams.text(p_02, "$\mathcal O_2$", align="<", margin=17);
+diagrams.text(p_03, "$\mathcal O_3$", align="v", margin=18);
+diagrams.text(p_04, "$\mathcal O_4$", align="^", margin=20);
+diagrams.text(p_05, "$\mathcal O_5$", align="<", margin=27);
+diagrams.text(p_06, "$\mathcal O_6$", align="<^", margin=17);
 
 view(160,30)
 diagrams.redraw(); hold off
